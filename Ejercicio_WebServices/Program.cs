@@ -1,4 +1,5 @@
 using Ejercicio_WebServices.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IVehiculoService, VehiculoService>();
+
+var conf = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(conf).CreateLogger();
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 

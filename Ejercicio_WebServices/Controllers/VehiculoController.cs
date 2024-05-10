@@ -11,15 +11,18 @@ namespace Ejercicio_WebServices.Controllers
     public class VehiculoController : ControllerBase
     {
         private readonly IVehiculoService _vehiculoService;
+        private readonly ILogger<VehiculoController> _logger;
 
-        public VehiculoController(IVehiculoService vehiculoService)
+        public VehiculoController(IVehiculoService vehiculoService, ILogger<VehiculoController> logger)
         {
             _vehiculoService = vehiculoService;
+            _logger = logger;
         }
 
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Vehiculo>>> GetAllVehiculos()
         {
+            _logger.LogInformation("Se invocó el EndPoint GetAll");
             var vehiculos = await _vehiculoService.GetAllVehiculos();
             return Ok(vehiculos);
         }
@@ -57,11 +60,12 @@ namespace Ejercicio_WebServices.Controllers
         public async Task<IActionResult> UpdateVehiculo(int id, VehiculoDTO vehiculo)
         {
             var vehiculoUpdate = await _vehiculoService.GetVehiculoById(id);
+            _logger.LogInformation($"El vehiculo a editar es: {vehiculo}");
             if (vehiculoUpdate == null)
             {
                 return NotFound();
             }
-            
+
             var newVehiculo = await _vehiculoService.UpdateVehiculo(id, vehiculo);
      
             return Ok(newVehiculo);
@@ -75,6 +79,7 @@ namespace Ejercicio_WebServices.Controllers
             {
                 return NotFound();
             }
+            _logger.LogWarning($"Se eliminó un vehículo con id: {id}");
 
             return Ok(deleted);
         }

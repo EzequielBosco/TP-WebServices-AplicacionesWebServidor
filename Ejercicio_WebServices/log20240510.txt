@@ -1,0 +1,1 @@
+2024-05-10 18:18:57.665 -03:00 [WRN] Se eliminó un vehículo con id: 1
