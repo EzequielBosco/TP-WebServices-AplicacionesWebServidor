@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ejercicio_WebServices.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class VehiculoController : ControllerBase
@@ -75,6 +74,7 @@ namespace Ejercicio_WebServices.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Vehiculo>> CreateVehiculo(VehiculoDTO vehiculo)
         {
@@ -90,6 +90,7 @@ namespace Ejercicio_WebServices.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateVehiculo(int id, VehiculoDTO vehiculo)
         {
@@ -113,6 +114,7 @@ namespace Ejercicio_WebServices.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteVehiculo(int id)
         {
