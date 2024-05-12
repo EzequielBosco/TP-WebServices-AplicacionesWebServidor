@@ -1,7 +1,7 @@
 ﻿using Ejercicio_WebServices.DTOs;
 using Ejercicio_WebServices.Models;
 
-namespace Ejercicio_WebServices.Services
+namespace Ejercicio_WebServices.Services.Implements
 {
     public class VehiculoService : IVehiculoService
     {
@@ -62,7 +62,7 @@ namespace Ejercicio_WebServices.Services
             var vehiculoToUpdate = _autos.LastOrDefault(v => v.Id == id);
 
             if (vehiculoToUpdate != null)
-            { 
+            {
                 vehiculoToUpdate.Marca = vehiculo.Marca;
                 vehiculoToUpdate.Modelo = vehiculo.Modelo;
                 vehiculoToUpdate.Color = vehiculo.Color;
@@ -92,7 +92,7 @@ namespace Ejercicio_WebServices.Services
 
             if (vehiculoToDelete != null)
             {
-                _autos.Remove(vehiculoToDelete); 
+                _autos.Remove(vehiculoToDelete);
                 return Task.FromResult(true);
             }
 
